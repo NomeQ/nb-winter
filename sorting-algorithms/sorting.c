@@ -13,7 +13,7 @@
 #include <string.h>
 #include <time.h>
 
-#define FILENAME "Data2.txt"
+#define FILENAME "Data1.txt"
 
 void Merge(int* B, int size_B, int* C, int size_C, int* A) {
 	int i = 0;
@@ -89,15 +89,15 @@ void swap(int* array, int pos1, int pos2) {
 int Partition(int* array, int upper, int lower) {
 	int p = array[lower];
 	int i = lower;
-	int j = upper;
+	int j = upper + 1;
 
 	while (i < j) {
-		while (array[i] < p) {
+		do {
 			i++;
-		}
-		while (array[j] > p) {
+		} while (array[i] < p);
+		do {
 			j--;
-		}
+		} while (array[j] > p);
 		swap(array, i, j);
 	}
 	swap(array, i, j);
@@ -162,7 +162,6 @@ int main() {
 	mergeSort(intArray, size);
 	end_t = clock();
 	merge_time = end_t - start_t;
-
 
 	printf("Array size: %d\n", size);
 	printf("Time for merge sorting: %f\n", printSeconds(merge_time));
